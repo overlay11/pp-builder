@@ -1,13 +1,30 @@
 #/usr/bin/env bash
 
 FILE=$1
-DEFAULT_PP=$2
-FNUMBER=$3
-EXPOSURE=$4
-FOCAL_LENGTH=$5
-ISO=$6
-LENS=$7
-CAMERA=$8
+
+value() {
+    KEY=$1; grep -m 1 ^$KEY= $FILE | cut -d= -f2
+}
+
+if [ $# -gt 1 ]; then
+    DEFAULT_PP=$2
+    FNUMBER=$3
+    EXPOSURE=$4
+    FOCAL_LENGTH=$5
+    ISO=$6
+    LENS=$7
+    CAMERA=$8
+    OUTPUT_FILE=$FILE.pp3
+else
+    DEFAULT_PP=`value DefaultProcParams`
+    FNUMBER=`value FNumber`
+    EXPOSURE=`value Shutter`
+    FOCAL_LENGTH=`value FocalLength`
+    ISO=`value ISO`
+    LENS=`value Lens`
+    CAMERA="`value Make` `value Model`"
+    OUTPUT_FILE=`value OutputProfileFileName`
+fi
 
 CLARITY=20
 UNSHARP_MASK_RADIUS=0.8
@@ -33,7 +50,7 @@ LEVEL1_CONTRAST=`echo "$DEFAULT_CONTRAST + 3 * $CONTRAST_STEP * l($ISO/200)/l(2)
 LEVEL2_CONTRAST=`echo "$DEFAULT_CONTRAST + 2 * $CONTRAST_STEP * l($ISO/200)/l(2)" | bc -l`
 LEVEL3_CONTRAST=`echo "$DEFAULT_CONTRAST + $CONTRAST_STEP * l($ISO/200)/l(2)" | bc -l`
 
-cat > $FILE.pp3 <<END_OF_TEMPLATE
+cat > $OUTPUT_FILE <<END_OF_TEMPLATE
 [General]
 Rank=0
 ColorLabel=0
