@@ -46,6 +46,8 @@ DENOISING_STEP=5
 DEFAULT_CONTRAST=1
 CONTRAST_STEP=0.025
 
+ISO_THRESHOLD=800
+
 STEP_COUNT=`echo "l($ISO/100)/l(2)" | bc -l`
 
 UNSHARP_MASK_AMOUNT=`echo "$DEFAULT_UNSHARP_MASK_AMOUNT - $UNSHARP_MASK_AMOUNT_STEP * $STEP_COUNT" | bc -l`; UNSHARP_MASK_AMOUNT=`round $UNSHARP_MASK_AMOUNT`
@@ -60,7 +62,7 @@ LEVEL2_CONTRAST=`echo "$DEFAULT_CONTRAST + 0.5 * $CONTRAST_STEP * ($STEP_COUNT -
 LEVEL3_CONTRAST=`echo "$DEFAULT_CONTRAST + 1.5 * $CONTRAST_STEP * ($STEP_COUNT - 1)" | bc -l`
 LEVEL4_CONTRAST=`echo "$DEFAULT_CONTRAST + 2.5 * $CONTRAST_STEP * ($STEP_COUNT - 1)" | bc -l`
 
-if [ $ISO -ge 800 ]; then
+if [ $ISO -ge $ISO_THRESHOLD ]; then
     DEMOSAICING_METHOD=igv
 else
     DEMOSAICING_METHOD=amaze
@@ -75,9 +77,9 @@ InTrash=false
 [Exposure]
 Auto=true
 Clip=0
-Compensation=0.35999999999999999
-Brightness=1
-Contrast=25
+Compensation=0
+Brightness=0
+Contrast=0
 Saturation=0
 Black=0
 HighlightCompr=41
