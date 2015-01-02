@@ -63,7 +63,7 @@ LEVEL3_CONTRAST=`echo "$DEFAULT_CONTRAST + 1.5 * $CONTRAST_STEP * ($STEP_COUNT -
 LEVEL4_CONTRAST=`echo "$DEFAULT_CONTRAST + 2.5 * $CONTRAST_STEP * ($STEP_COUNT - 1)" | bc -l`
 
 if [ $ISO -ge $ISO_THRESHOLD ]; then
-    DEMOSAICING_METHOD=igv
+    DEMOSAICING_METHOD=lmmse
 else
     DEMOSAICING_METHOD=amaze
 fi
@@ -235,13 +235,13 @@ Luma=$DENOISING_LUMA
 Ldetail=50
 Chroma=$DENOISING_CHROMA
 Method=RGB
-LMethod=CUR
+LMethod=SLI
 CMethod=MAN
-C2Method=AUTO
-SMethod=shal
-MedMethod=soft
+C2Method=MANU
+SMethod=shalbi
+MedMethod=33
 RGBMethod=soft
-MethodMed=Lonly
+MethodMed=Lab
 Redchro=0
 Bluechro=0
 Gamma=1.7
