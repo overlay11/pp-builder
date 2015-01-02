@@ -76,15 +76,15 @@ InTrash=false
 
 [Exposure]
 Auto=true
-Clip=0
+Clip=0.02
 Compensation=0
 Brightness=0
 Contrast=0
 Saturation=0
 Black=0
-HighlightCompr=41
-HighlightComprThreshold=33
-ShadowCompr=0
+HighlightCompr=0
+HighlightComprThreshold=0
+ShadowCompr=50
 CurveMode=Standard
 CurveMode2=Standard
 Curve=0;
@@ -106,12 +106,12 @@ Auto=false
 ComplementaryColors=true
 Setting=NormalContrast
 Filter=None
-MixerRed=43
+MixerRed=33
 MixerOrange=33
 MixerYellow=33
 MixerGreen=33
 MixerCyan=33
-MixerBlue=30
+MixerBlue=33
 MixerMagenta=33
 MixerPurple=33
 GammaRed=0
@@ -127,8 +127,8 @@ AfterCurve=0;
 [Luminance Curve]
 Brightness=0
 Contrast=0
-Chromaticity=5
-AvoidColorShift=true
+Chromaticity=0
+AvoidColorShift=false
 RedAndSkinTonesProtection=0
 LCredsk=true
 LCurve=0;
@@ -161,7 +161,7 @@ DeconvIterations=30
 Enabled=true
 Pastels=$VIBRANCE
 Saturated=$VIBRANCE
-PSThreshold=0;0;
+PSThreshold=0;75;
 ProtectSkins=false
 AvoidColorShift=true
 PastSatTog=true
@@ -181,8 +181,8 @@ Uniformity=50
 
 [White Balance]
 Setting=Camera
-Temperature=6345
-Green=1.006
+Temperature=6200
+Green=1
 Equal=1
 
 [Color appearance]
@@ -223,17 +223,22 @@ Threshold=$IMPULSE_DENOISING
 [Defringing]
 Enabled=false
 Radius=2
-Threshold=12
+Threshold=13
 HueCurve=1;0.16666666699999999;0;0.34999999999999998;0.34999999999999998;0.34699999999999998;0;0.34999999999999998;0.34999999999999998;0.51366742600000004;0;0.34999999999999998;0.34999999999999998;0.66894457100000004;0;0.34999999999999998;0.34999999999999998;0.82877752459999998;0.97835991;0.34999999999999998;0.34999999999999998;0.99088838270000001;0;0.34999999999999998;0.34999999999999998;
 
 [Directional Pyramid Denoising]
 Enabled=true
 Enhance=true
 Median=true
+Auto=false
 Luma=$DENOISING_LUMA
 Ldetail=50
 Chroma=$DENOISING_CHROMA
 Method=RGB
+LMethod=CUR
+CMethod=MAN
+C2Method=AUTO
+SMethod=shal
 MedMethod=soft
 RGBMethod=soft
 MethodMed=Lonly
@@ -241,6 +246,8 @@ Redchro=0
 Bluechro=0
 Gamma=1.7
 Passes=1
+LCurve=1;0.050000000000000003;0.14999999999999999;0.34999999999999998;0.34999999999999998;0.55000000000000004;0.040000000000000001;0.34999999999999998;0.34999999999999998;
+CCCurve=1;0.050000000000000003;0.5;0.34999999999999998;0.34999999999999998;0.34999999999999998;0.050000000000000003;0.34999999999999998;0.34999999999999998;
 
 [EPD]
 Enabled=false
@@ -265,10 +272,10 @@ X=0
 Y=0
 W=4048
 H=3032
-FixedRatio=false
-Ratio=3:2
+FixedRatio=true
+Ratio=4:3
 Orientation=Landscape
-Guide=None
+Guide=Frame
 
 [Coarse Transformation]
 Rotate=0
@@ -321,7 +328,7 @@ CenterY=0
 
 [Resize]
 Enabled=true
-Scale=0.29999999999999999
+Scale=1
 AppliesTo=Cropped area
 Method=Lanczos
 DataSpecified=3
@@ -329,12 +336,12 @@ Width=$WIDTH
 Height=$HEIGHT
 
 [Color Management]
-InputProfile=(camera)
+InputProfile=(cameraICC)
 ToneCurve=false
-BlendCMSMatrix=true
+BlendCMSMatrix=false
 DCPIlluminant=0
-WorkingProfile=sRGB
-OutputProfile=No ICM: sRGB output
+WorkingProfile=ProPhoto
+OutputProfile=RT_sRGB
 Gammafree=default
 Freegamma=false
 GammaValue=2.2200000000000002
@@ -356,6 +363,11 @@ Hueskin=-5;25;170;120;
 HCurve=0;
 SCurve=0;
 VCurve=0;
+
+[Film Simulation]
+Enabled=false
+ClutFilename=
+Strength=100
 
 [RGB Curves]
 LumaMode=false
@@ -383,9 +395,9 @@ Bluehigh=0
 Autosat=true
 OpacityCurve=1;0;0.29999999999999999;0.34999999999999998;0;0.25;0.80000000000000004;0.34999999999999998;0.34999999999999998;0.69999999999999996;0.80000000000000004;0.34999999999999998;0.34999999999999998;1;0.29999999999999999;0;0;
 ColorCurve=1;0.050000000000000003;0.62;0.25;0.25;0.58499999999999996;0.11;0.25;0.25;
-SatProtectionThreshold=80
-SaturatedOpacity=30
-Strengthprotection=50
+SatProtectionThreshold=30
+SaturatedOpacity=80
+Strength=50
 HighlightsColorSaturation=60;80;
 ShadowsColorSaturation=80;208;
 ClCurve=3;0;0;0.34999999999999998;0.65000000000000002;1;1;
@@ -403,7 +415,8 @@ FlatFieldClipControl=false
 CA=true
 CARed=0
 CABlue=0
-HotDeadPixels=false
+HotPixelFilter=true
+DeadPixelFilter=false
 HotDeadPixelThresh=40
 PreExposure=1
 PrePreserv=0
