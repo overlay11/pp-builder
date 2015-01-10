@@ -1,4 +1,4 @@
-#/usr/bin/env bash
+#!/usr/bin/env sh
 
 FILE=$1
 
@@ -236,11 +236,11 @@ Auto=false
 Luma=$DENOISING_LUMA
 Ldetail=50
 Chroma=$DENOISING_CHROMA
-Method=RGB
+Method=Lab
 LMethod=SLI
 CMethod=MAN
 C2Method=MANU
-SMethod=shalbi
+SMethod=shal
 MedMethod=33
 RGBMethod=soft
 MethodMed=Lab
