@@ -110,10 +110,10 @@ Blue=0;0;100;
 
 [Black & White]
 Enabled=false
-Method=Desaturation
+Method=ChannelMixer
 Auto=false
 ComplementaryColors=true
-Setting=NormalContrast
+Setting=RGB-Rel
 Filter=None
 MixerRed=33
 MixerOrange=33
